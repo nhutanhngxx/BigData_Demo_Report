@@ -116,19 +116,21 @@ True
 
 ### Python -> Merging/updating
 
-> > > import pyarrow as pa  
-> > > from deltalake import DeltaTable, write_deltalake
-> > > data = pa.table({'id' : list(range(100))})
-> > > write_deltalake('delete-test', data)
-> > > dt = DeltaTable('delete-test')
-> > > dt.version()
-> > > 0
+>>> import pyarrow as pa  
+>>> from deltalake import DeltaTable, write_deltalake
+>>> data = pa.table({'id' : list(range(100))})
+>>> write_deltalake('delete-test', data)
+>>> dt = DeltaTable('delete-test')
+>>> dt.version()
+>>> 0
 
-> > > dt.to_pandas().count()
-> > > id 100
-> > > dtype: int64
 
-> > > dt.delete('id % 2 == 0')
-> > > {'num_added_files': 1, 'num_removed_files': 1, 'num_deleted_rows': 50, 'num_copied_rows': 50, 'execution_time_ms': 146, 'scan_time_ms': 86, 'rewrite_time_ms': 60}
-> > > dt.version()
-> > > 1
+>>> dt.to_pandas().count()
+>>> id 100
+>>> dtype: int64
+
+
+>>> dt.delete('id % 2 == 0')
+>>> {'num_added_files': 1, 'num_removed_files': 1, 'num_deleted_rows': 50, 'num_copied_rows': 50, 'execution_time_ms': 146, 'scan_time_ms': 86, 'rewrite_time_ms': 60}
+>>> dt.version()
+>>> 1
