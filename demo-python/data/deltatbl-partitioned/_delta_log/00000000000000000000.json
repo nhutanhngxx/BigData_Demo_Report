@@ -1,0 +1,95 @@
+{
+    "commitInfo": {
+        "timestamp": 1629873032991,
+        "operation": "WRITE",
+        "operationParameters": {
+            "mode": "ErrorIfExists",
+            "partitionBy": "[\"c2\", \"year\"]"
+        },
+        "isBlindAppend": true,
+        "operationMetrics": {
+            "numFiles": "4",
+            "numOutputBytes": "1734",
+            "numOutputRows": "10"
+        }
+    }
+} {
+    "protocol": {
+        "minReaderVersion": 1,
+        "minWriterVersion": 2
+    }
+} {
+    "metaData": {
+        "id": "testId",
+        "format": {
+            "provider": "parquet",
+            "options": {}
+        },
+        "schemaString": "{\"type\":\"struct\",\"fields\":[{\"name\":\"c1\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"c2\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"year\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+        "partitionColumns": ["c2", "year"],
+        "configuration": {},
+        "createdTime": 1629873029858
+    }
+} {
+    "add": {
+        "path": "c2=foo0/part-00000-2bcc9ff6-0551-4401-bd22-d361a60627e3.c000.snappy.parquet",
+        "partitionValues": {
+            "c2": "foo0"
+        },
+        "size": 436,
+        "modificationTime": 1629873032000,
+        "dataChange": true
+    }
+} {
+    "add": {
+        "path": "c2=foo1/part-00000-786c7455-9587-454f-9a4c-de0b22b62bbd.c000.snappy.parquet",
+        "partitionValues": {
+            "c2": "foo1"
+        },
+        "size": 431,
+        "modificationTime": 1629873032000,
+        "dataChange": true
+    }
+} {
+    "add": {
+        "path": "c2=foo0/part-00001-ca647ee7-f1ad-4d70-bf02-5d1872324d6f.c000.snappy.parquet",
+        "partitionValues": {
+            "c2": "foo0"
+        },
+        "size": 431,
+        "modificationTime": 1629873032000,
+        "dataChange": true
+    }
+} {
+    "add": {
+        "path": "c2=foo1/part-00001-1c702e73-89b5-465a-9c6a-25f7559cd150.c000.snappy.parquet",
+        "partitionValues": {
+            "c2": "foo1"
+        },
+        "size": 436,
+        "modificationTime": 1629873032000,
+        "dataChange": true
+    }
+}  {
+    "add": {
+          "path": "year=2022/0-ec9935aa-a154-4ba4-ab7e-92a53369c433-2.parquet",
+          "partitionValues": {
+               "year": "2022"
+          },
+          "size": 3025,
+          "modificationTime": 1705178628881,
+          "dataChange": true,
+          "stats": "{\"numRecords\": 4, \"minValues\": {\"month\": 9,
+          \"decimal date\": 2022.7083, \"average\": 415.74,
+          \"deseasonalized\": 419.02, \"ndays\": 24, \"sdev\": 0.27,
+          \"unc\": 0.1}, \"maxValues\": {\"month\": 12, \"decimal date\": 2022.9583,
+          \"average\": 418.99, \"deseasonalized\": 419.72, \"ndays\": 30,
+          \"sdev\": 0.57, \"unc\": 0.22}, \"nullCount\": {\"month\": 0,
+          \"decimal date\": 0, \"average\": 0, \"deseasonalized\": 0, \"ndays\": 0,\"sdev\": 0, \"unc\": 0}}",
+          "tags": null,
+          "deletionVector": null,
+          "baseRowId": null,
+          "defaultRowCommitVersion": null,
+          "clusteringProvider": null
+    }
+}
