@@ -4,7 +4,7 @@
         "operation": "WRITE",
         "operationParameters": {
             "mode": "ErrorIfExists",
-            "partitionBy": "[\"c2\", \"year\"]"
+            "partitionBy": "[\"c2\"]"
         },
         "isBlindAppend": true,
         "operationMetrics": {
@@ -26,7 +26,7 @@
             "options": {}
         },
         "schemaString": "{\"type\":\"struct\",\"fields\":[{\"name\":\"c1\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"c2\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"year\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
-        "partitionColumns": ["c2", "year"],
+        "partitionColumns": ["c2"],
         "configuration": {},
         "createdTime": 1629873029858
     }
@@ -69,27 +69,5 @@
         "size": 436,
         "modificationTime": 1629873032000,
         "dataChange": true
-    }
-}  {
-    "add": {
-          "path": "year=2022/0-ec9935aa-a154-4ba4-ab7e-92a53369c433-2.parquet",
-          "partitionValues": {
-               "year": "2022"
-          },
-          "size": 3025,
-          "modificationTime": 1705178628881,
-          "dataChange": true,
-          "stats": "{\"numRecords\": 4, \"minValues\": {\"month\": 9,
-          \"decimal date\": 2022.7083, \"average\": 415.74,
-          \"deseasonalized\": 419.02, \"ndays\": 24, \"sdev\": 0.27,
-          \"unc\": 0.1}, \"maxValues\": {\"month\": 12, \"decimal date\": 2022.9583,
-          \"average\": 418.99, \"deseasonalized\": 419.72, \"ndays\": 30,
-          \"sdev\": 0.57, \"unc\": 0.22}, \"nullCount\": {\"month\": 0,
-          \"decimal date\": 0, \"average\": 0, \"deseasonalized\": 0, \"ndays\": 0,\"sdev\": 0, \"unc\": 0}}",
-          "tags": null,
-          "deletionVector": null,
-          "baseRowId": null,
-          "defaultRowCommitVersion": null,
-          "clusteringProvider": null
     }
 }

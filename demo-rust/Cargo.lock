@@ -427,15 +427,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "building-native-applications-with-delta-lake"
-version = "0.1.0"
-dependencies = [
- "arrow",
- "deltalake",
- "tokio",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -873,6 +864,15 @@ dependencies = [
  "tokio",
  "url",
  "uuid",
+]
+
+[[package]]
+name = "demo-rust"
+version = "0.1.0"
+dependencies = [
+ "arrow",
+ "deltalake",
+ "tokio",
 ]
 
 [[package]]

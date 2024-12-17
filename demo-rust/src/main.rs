@@ -4,6 +4,8 @@ use deltalake::arrow::util::pretty::print_batches;
 
 #[tokio::main]
 async fn main() {
+    // Step 1: Load table deltatbl
+
     println!("Loading deltatbl-partitioned");
     // Mở table deltatbl-partitioned
     let table = deltalake::open_table("../data/deltatbl-partitioned").await.expect("Failed to open table");
@@ -14,6 +16,8 @@ async fn main() {
         println!(" - {}", file.as_ref());
     }
 
+    // Step 2: Query table deltatbl
+
     // Tạo SessionContext chứa các bảng và thực thi các câu lệnh SQL
     let ctx = SessionContext::new();
     // Đăng ký bảng demo với dữ liệu từ table
@@ -23,6 +27,8 @@ async fn main() {
     // Thực thi câu lệnh SQL
     let batches = ctx.sql("SELECT * FROM demo LIMIT 5").await.expect("Failed to execute SQL").collect().await.unwrap();
     print_batches(&batches).expect("Failed to print batches");
+
+    // Step 3: Query table deltatbl với điều kiện
 
     // Thực thi câu lệnh SQL: SELECT * FROM demo WHERE c2 = 'foo0' để lấy ra dữ liệu cột c2 có giá trị là foo0
     let df = ctx.sql("SELECT * FROM demo WHERE c2 = 'foo0'").await.expect("Failed to create data frame");
