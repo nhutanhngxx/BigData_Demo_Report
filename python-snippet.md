@@ -1,8 +1,4 @@
-# Python snippets
-
-This file contains the code snippets from the chapter in a format that can be
-easily doctested with `make test`
-
+## File .md Snippet
 ## Getting Started
 
 ```
@@ -75,7 +71,8 @@ This example will use the CO2 data referened below to generate a partitioned tab
 >>> len(df) > 0
 >>> df['year'] = pd.to_datetime(df['Date']).dt.year  // Không chạy vì đã tìm thấy file data giống sách
 >>> write_deltalake('data/gen/filestats', data=df, partition_by=['year'], max_rows_per_file=4, max_rows_per_group=4, min_rows_per_group=1)
-
+```
+```
 >>> from deltalake import DeltaTable
 >>> dt = DeltaTable(r'.\data\gen\filestats')
 >>> len(dt.files())
@@ -83,9 +80,9 @@ This example will use the CO2 data referened below to generate a partitioned tab
 >>> df = dt.to_pandas(filters=[('year', '=', 2022), ('month', '>=', 9)]) // Khong tim thay data giong trong sach
 >>> len(df)
 4
-
+```
 ### Writing data
-
+```
 >>> import pandas as pd
 >>> df = pd.read_csv(r'.\data\deltatbl-partitioned\co2_mm_mlo.csv', comment='#')
 >>> len(df) > 0
@@ -98,17 +95,17 @@ True
 >>> df = dt.to_pandas()
 >>> len(df) > 0
 True
-
+```
 ### With partitioning
-
+```
 >>> df = pd.read_csv(r'.\data\deltatbl-partitioned\co2_mm_mlo.csv', comment='#')
 >>> len(df) > 0
 True
 >>> df['year'] = pd.to_datetime(df['Date']).dt.year  // Không chạy vì đã tìm thấy file data giống sách
 >>> write_deltalake('./data/gen/co2_monthly_partitioned', data=df, partition_by=['year'])
-
+```
 ### Going beyond Pandas
-
+```
 >>> df = pd.read_csv(r'.\data\deltatbl-partitioned\co2_mm_mlo.csv', comment='#')
 >>> df['year'] = pd.to_datetime(df['Date']).dt.year  // Không chạy vì đã tìm thấy file data giống sách
 >>> write_deltalake('./data/gen/co2_monthly_partitioned', data=df, mode='overwrite', partition_by=['year'])
@@ -116,6 +113,7 @@ True
 
 ### Python -> Merging/updating
 
+```
 >>> import pyarrow as pa  
 >>> from deltalake import DeltaTable, write_deltalake
 >>> data = pa.table({'id' : list(range(100))})
@@ -124,12 +122,12 @@ True
 >>> dt.version()
 >>> 0
 ```
-
+```
 >>> dt.to_pandas().count()
 >>> id 100
 >>> dtype: int64
 ```
-
+```
 >>> dt.delete('id % 2 == 0')
 >>> {'num_added_files': 1, 'num_removed_files': 1, 'num_deleted_rows': 50, 'num_copied_rows': 50, 'execution_time_ms': 146, 'scan_time_ms': 86, 'rewrite_time_ms': 60}
 >>> dt.version()
