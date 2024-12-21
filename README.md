@@ -2,16 +2,16 @@
 ## Python
 #### Khởi tạo môi trường
 ```
-% cd ~/dldg # Choose the directory of your choice
-% virtualenv venv # Configure a Python virtualenv for managing deps in the ./venv/ directory
-% source ./venv/bin/activate # Activate the virtualenv in this shell
+% cd ~/dldg
+% virtualenv venv
+% source ./venv/bin/activate
 ```
 #### Cài đặt thư viện
 ```
 % pip install 'deltalake>=0.18.2' pandas
 % python
 >>> from deltalake import DeltaTable
->>> dt = DeltaTable('./deltatbl-partitioned')
+>>> dt = DeltaTable('./data/deltatbl-partitioned')
 >>> dt.files()
 ```
 ```
@@ -33,36 +33,25 @@
   ###### Lấy dữ liệu từ file CSV
     >>> import pandas as pd
     >>> from deltalake import DeltaTable, write_deltalake
-    >>> df = pd.read_csv(r'.\data\deltatbl-partitioned\co2_mm_mlo.csv', comment='#')
-    >>> write_deltalake('data/gen/filestats', 
-                         data=df, 
-                         partition_by=['year'], 
-                         max_rows_per_file=4, 
-                         max_rows_per_group=4, 
-                         min_rows_per_group=1)
-
+    >>> df = pd.read_csv(r'./data/deltatbl-partitioned/co2_mm_mlo.csv', comment='#')
+    >>> write_deltalake('data/gen/filestats', data=df, partition_by=['year'], max_rows_per_file=4, max_rows_per_group=4, min_rows_per_group=1)
+  ###### Ghi đè
+    >>> write_deltalake('data/gen/filestats', data=df, partition_by=['year'], max_rows_per_file=4, max_rows_per_group=4, min_rows_per_group=1, mode="overwrite")
 ```
 >>> from deltalake import DeltaTable
->>> dt = DeltaTable(r'.\data\gen\filestats')
+>>> dt = DeltaTable(r'./data/gen/filestats')
 >>> len(dt.files())
 198
 >>> df = dt.to_pandas(filters=[('year', '=', 2022), ('month', '>=', 9)])
 >>> len(df)
 4
 ```
-    >>> from deltalake import DeltaTable
-    >>> dt = DeltaTable('./data/gen/filestats')
-    >>> len(dt.files())
-
-    >>> df = dt.to_pandas(filters=[('year', '=', 2022), ('month', '>=', 9)])
-    >>> df
 
 #### Writing data
     >>> import pandas as pd
     >>> from deltalake import write_deltalake, DeltaTable
     >>> df = pd.read_csv('./data/co2_mm_mlo.csv', comment='#')
     >>> len(df)
-
 
     >>> write_deltalake('./data/co2_monthly', df)
     >>> dt = DeltaTable('./data/co2_monthly')
