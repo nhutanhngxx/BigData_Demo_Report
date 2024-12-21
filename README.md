@@ -1,11 +1,12 @@
 # SOURCE CODE DEMO FOR REPORT
-## CHAPTER 6 : Building Native Applications with Delta Lake
-### Python
+## Python
+#### Khởi tạo môi trường
 ```
 % cd ~/dldg # Choose the directory of your choice
 % virtualenv venv # Configure a Python virtualenv for managing deps in the ./venv/ directory
 % source ./venv/bin/activate # Activate the virtualenv in this shell
 ```
+#### Cài đặt thư viện
 ```
 % pip install 'deltalake>=0.18.2' pandas
 % python
@@ -24,11 +25,31 @@
 4. Construct the pandas.DataFrame object using the data loaded in memory
   ##### - Partitions : Structuring of data in storage to allow grouping of files by common prefixes, such as mytable/year=2024/*.parquet
     >>> dt.to_pandas(partitions=[('c2', '=', 'foo0')])
-    >>> dt.files([('c2', '=', 'foo0')])`
+    >>> dt.files([('c2', '=', 'foo0')])
     >>> dt.to_pandas(partitions=[('c2', '=', 'foo0')], columns=['c1'])
     >>> dt.to_pandas(partitions=[('c2', '=', 'foo0')], columns=['c1'], filters=[('c1', '<=', 4), ('c1', '>', 0)])
 
   ##### - File statistics : Additional metadata included by the writer in the transaction log about the .parquet file, whether Apache Spark or a native Python/Rust, that indicates the minimum or maximum values of columns contained in that data column.
+  ###### Lấy dữ liệu từ file CSV
+    >>> import pandas as pd
+    >>> from deltalake import DeltaTable, write_deltalake
+    >>> df = pd.read_csv(r'.\data\deltatbl-partitioned\co2_mm_mlo.csv', comment='#')
+    >>> write_deltalake('data/gen/filestats', 
+                         data=df, 
+                         partition_by=['year'], 
+                         max_rows_per_file=4, 
+                         max_rows_per_group=4, 
+                         min_rows_per_group=1)
+
+```
+>>> from deltalake import DeltaTable
+>>> dt = DeltaTable(r'.\data\gen\filestats')
+>>> len(dt.files())
+198
+>>> df = dt.to_pandas(filters=[('year', '=', 2022), ('month', '>=', 9)])
+>>> len(df)
+4
+```
     >>> from deltalake import DeltaTable
     >>> dt = DeltaTable('./data/gen/filestats')
     >>> len(dt.files())
@@ -70,8 +91,8 @@
   ##### - RecordBatch
   ##### - Table
   ##### - DataSet
-### Rust
+## Rust
   ##### - Reading large data
   ##### - Writing data
   ##### - Merging/updating
-### Building a Lambda
+## Building a Lambda
